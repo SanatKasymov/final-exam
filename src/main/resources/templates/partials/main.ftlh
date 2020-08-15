@@ -9,12 +9,55 @@
 
         <title>${title}</title>
         <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous"/>
         <#list styles as styleSource>
             <link rel="stylesheet" href="${styleSource}">
         </#list>
-        <h1>Welcome to the Cafe Critic!</h1>
     </head>
     <header>
+          <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Главная</a>
+            <ul id="ulist" class="navbar-nav nav ">
+                        <#if authorized??>
+                        <ul class="nav ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/log_out">Выйти</a>
+                            </li>
+                        </ul>
+                        <ul class="nav ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/create_new_place">Добавить место</a>
+                            </li>
+                        </ul>
+                            <#else>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/register">Регистрация</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/log_in">Войти</a>
+                                </li>
+                        </#if>
+                          <div class="collapse navbar-collapse justify-content-end">
+                <ul class="nav">
+                        <li class="nav-item mr-2 form-inline">
+                            <input type="search" id="search-input" class="form-control " placeholder="Поиск"/>
+                            <button class="btn btn-outline-light ml-1" id="btn-search" onclick="search()">Поиск</button>
+                        </li>
+                        <li class="nav-item">
+                            <form class="flex box-128" action="/logout" method="post">
+                                <#if _csrf??>
+                                    <input type="hidden" name="${(_csrf.parameterName)!'csrf'}"
+                                           value="${(_csrf.token)!'--no-token--'}"/>
+                                </#if>
+                            </form>
+                        </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     </header>
     <body>
