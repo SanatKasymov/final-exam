@@ -7,10 +7,11 @@ body{
     width: 1280px;
     margin: 0 auto;
 }
-.place-cards {
-    max-width: 300px;
-    display:inline-block;
+.wrapper{
+    display: grid;
+    grid-template-columns: 400px 400px 400px;
 }
-.card-img-top {
-    width: 300px;
+.place-image{
+    width: 350px;
+    height: auto;
 }

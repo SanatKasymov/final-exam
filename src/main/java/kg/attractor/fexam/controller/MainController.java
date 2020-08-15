@@ -5,8 +5,9 @@ import kg.attractor.fexam.repository.PlaceRepository;
 import kg.attractor.fexam.service.PlaceService;
 import kg.attractor.fexam.service.PropertiesService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,13 +28,14 @@ public class MainController {
         var places = placeRepository.findAll(pageable);
         var uri = uriBuilder.getRequestURI();
         var placeModel = model.addAttribute("places", placeService.findAllPLaces());
-
         PageableExample.constructPageable(places, propertiesService.getDefaultPageSize(), placeModel, uri);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = auth.getName();
+        if(!userEmail.equals("anonymousUser")){
+            model.addAttribute("authorized", true);
+        }
         return "main_page";
     }
 
 
-    private static String constructPageUri(String uri, int page, int size){
-        return String.format("%s?page=%s&size=%s", uri, page, size);
-    }
 }

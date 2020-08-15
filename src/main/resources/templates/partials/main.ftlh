@@ -28,7 +28,7 @@
                                     <#if _csrf??>
                                         <input type="hidden" name="${(_csrf.parameterName)!'csrf'}" value="${(_csrf.token)!'--no-token--'}"/>
                                     </#if>
-                                    <button class="flex box-128 logout-button">Выйти</button>
+                                    <button class="btn btn-outline-light">Выйти</button>
                                 </form>
                             </li>
                         </ul>
@@ -61,6 +61,7 @@
                         </li>
                 </ul>
             </div>
+            </ul>
         </div>
     </nav>
 
