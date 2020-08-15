@@ -11,11 +11,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @Controller
 @RequestMapping
@@ -43,6 +43,17 @@ public class MainController {
     public String placePage(@PathVariable int id, Model model){
         model.addAttribute("place", placeRepository.findById(id).get());
         return "place_page";
+    }
+
+    @GetMapping("/create_new_place")
+    public String newPlacePage(Model model) {
+        return "create_new_place";
+    }
+
+    @PostMapping("/create_new_place")
+    public String rootSave(@RequestParam("place_name") String name, @RequestParam("place_description") String description,
+                           @RequestParam("place_image") MultipartFile image) throws IOException {
+        placeService.addNewPlace(name, description, image);
     }
 
 }
