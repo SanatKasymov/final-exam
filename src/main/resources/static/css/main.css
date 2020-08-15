@@ -19,3 +19,7 @@ body{
     width: 400px;
     height: 300px;
 }
+.flex-dir {
+    display: flex;
+    justify-content: space-between;
+}
