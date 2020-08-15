@@ -1,4 +1,7 @@
 package kg.attractor.fexam.service;
+import kg.attractor.fexam.DTO.UserDTO;
+import kg.attractor.fexam.exception.UserAlreadyExistException;
+import kg.attractor.fexam.exception.UserNotFoundException;
 import kg.attractor.fexam.model.User;
 import kg.attractor.fexam.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -19,10 +22,9 @@ public class UserService {
         }
         var user = User.builder()
                 .name(userDTO.getName())
-                .surname(userDTO.getSurname())
                 .email(userDTO.getEmail())
                 .login(userDTO.getLogin())
-                .password(passwordEncoder.encode(userDTO.getPassword()))
+                .password(encoder.encode(userDTO.getPassword()))
                 .build();
 
         userRepository.save(user);
