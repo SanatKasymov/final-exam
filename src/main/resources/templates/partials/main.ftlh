@@ -24,7 +24,12 @@
                         <#if authorized??>
                         <ul class="nav ">
                             <li class="nav-item">
-                                <a class="nav-link" href="/log_out">Выйти</a>
+                                <form class="flex box-128" action="/logout" method="post">
+                                    <#if _csrf??>
+                                        <input type="hidden" name="${(_csrf.parameterName)!'csrf'}" value="${(_csrf.token)!'--no-token--'}"/>
+                                    </#if>
+                                    <button class="flex box-128 logout-button">Выйти</button>
+                                </form>
                             </li>
                         </ul>
                         <ul class="nav ">
@@ -37,7 +42,7 @@
                                     <a class="nav-link" href="/register">Регистрация</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/log_in">Войти</a>
+                                    <a class="nav-link" href="/login">Войти</a>
                                 </li>
                         </#if>
                           <div class="collapse navbar-collapse justify-content-end">
