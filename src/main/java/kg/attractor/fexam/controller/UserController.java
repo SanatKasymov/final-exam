@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
@@ -28,6 +29,14 @@ public class UserController {
         var user = userService.getByEmail(principal.getName());
         model.addAttribute("dto", user);
         return "profile";
+    }
+
+    @PostMapping("/register")
+    public String registerPage(@RequestParam("name")String name, @RequestParam("email")String email, @RequestParam("login")String login,
+                               @RequestParam("password")String password, Model model, HttpSession session, Principal principal) {
+
+        userService.register(name, email, login, password);
+        return "redirect:/login";
     }
 
     @GetMapping("/register")

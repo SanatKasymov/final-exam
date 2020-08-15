@@ -15,7 +15,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
 
-    public UserDTO register(UserDTO userDTO){
+    public UserDTO register(String name, String email, String login, String password){
+
+        UserDTO userDTO = UserDTO.builder()
+                .name(name)
+                .email(email)
+                .login(login)
+                .password(password)
+                .build();
 
         if(userRepository.existsByEmail(userDTO.getEmail())){
             throw new UserAlreadyExistException();

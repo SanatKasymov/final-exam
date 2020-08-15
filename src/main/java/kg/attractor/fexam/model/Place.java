@@ -16,6 +16,9 @@ public class Place {
     private Integer id;
 
     @Column(length = 100)
+    private String image;
+
+    @Column(length = 100)
     private String name;
 
     @Column
