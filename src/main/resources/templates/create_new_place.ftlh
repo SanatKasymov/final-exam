@@ -23,7 +23,7 @@
                 <input type="file" name="place_image" id="image" required>
             </div>
             <div>
-                <button type="submit">Добавить заведение!</button>
+                <button class="add-place-button btn btn-outline-primary" type="submit">Добавить заведение!</button>
             </div>
             <div>
                 <#if errors?? >

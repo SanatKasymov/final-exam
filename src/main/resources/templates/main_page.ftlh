@@ -21,8 +21,9 @@
                 <h4>There is no places</h4>
             </#if>
           </div>
-          <#include "partials/pagination.ftlh">
       </div>
   </div>
+    <#include "partials/pagination.ftlh">
+
 
 </@main.renderWith>

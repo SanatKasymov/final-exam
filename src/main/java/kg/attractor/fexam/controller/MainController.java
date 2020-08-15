@@ -9,22 +9,16 @@ import kg.attractor.fexam.service.CommentService;
 import kg.attractor.fexam.service.PlaceService;
 import kg.attractor.fexam.service.PropertiesService;
 import lombok.AllArgsConstructor;
-import org.dom4j.rule.Mode;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.security.Principal;
 import java.util.List;
 
@@ -36,7 +30,6 @@ public class MainController {
     private final PropertiesService propertiesService;
     private final PlaceService placeService;
     private final CommentService commentService;
-    private final UserRepository userRepository;
 
 
     @GetMapping("/")
@@ -107,6 +100,9 @@ public class MainController {
     @PostMapping("/add_new_image")
     public String addNewPlace(@RequestParam("place_id") Integer placeId,
             @RequestParam("place_image") MultipartFile image) throws IOException {
+        if(image.getOriginalFilename().equals("")){
+            return "redirect:/places/"+placeId;
+        }
         int id = placeService.addNewImage(image, placeId);
         return "redirect:/places/"+id;
     }

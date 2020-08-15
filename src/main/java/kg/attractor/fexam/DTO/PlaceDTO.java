@@ -21,7 +21,7 @@ public class PlaceDTO {
                 .image(place.getImage())
                 .name(place.getName())
                 .description(place.getDescription())
-                .rating(place.getRating())
+                .rating(Math.round(place.getRating()*10)/10.0)
                 .build();
     }
 }
