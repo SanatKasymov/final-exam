@@ -32,7 +32,7 @@
                         <#if _csrf??>
                             <input type="hidden" name="${(_csrf.parameterName)!'csrf'}" value="${(_csrf.token)!'--no-token--'}"/>
                         </#if>
-                        <input type="hidden" name="topic_id" value="${place.id}"/>
+                        <input type="hidden" name="place_id" value="${place.id}"/>
                         <textarea type="text"  name="message_content" placeholder="Что вы думаете об этом заведении?" name="text" id="text"></textarea>
                         <div class = "add-message">
                             <button type="button" id="add-message">Отправить</button>
