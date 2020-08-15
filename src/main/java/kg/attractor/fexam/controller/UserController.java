@@ -2,6 +2,7 @@ package kg.attractor.fexam.controller;
 
 import kg.attractor.fexam.model.User;
 import kg.attractor.fexam.repository.UserRepository;
+import kg.attractor.fexam.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,34 +19,20 @@ import java.security.Principal;
 @RequestMapping
 @AllArgsConstructor
 public class UserController {
-//    private final UserService userService;
+    private final UserService userService;
     private final UserRepository userRepository;
 
 
     @GetMapping("/profile")
     public String userProfile(Model model, Principal principal){
-//        var user = userService.getByEmail(principal.getName());
-//        model.addAttribute("dto", user);
+        var user = userService.getByEmail(principal.getName());
+        model.addAttribute("dto", user);
         return "profile";
     }
 
     @GetMapping("/register")
     public String getRegisterPage(Model model){
         return "register";
-    }
-
-    @PostMapping("/register")
-    public String registerPage(User user,
-                               BindingResult validationResult,
-                               RedirectAttributes attributes) {
-        attributes.addFlashAttribute("dto", user);
-
-        if(validationResult.hasFieldErrors()){
-            attributes.addFlashAttribute("errors", validationResult.getFieldErrors());
-            return "redirect:/register";
-        }
-//        userService.register(user);
-        return "redirect:/login";
     }
 
     @GetMapping("/login")
