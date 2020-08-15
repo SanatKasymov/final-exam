@@ -2,7 +2,7 @@
 <@main.renderWith>
   <div>
       <div>
-          <h4>Latest topics:</h4>
+          <h4>Places</h4>
           <#if places??>
               <#list places as place>
                     <a href="/topic/${place.id}">
