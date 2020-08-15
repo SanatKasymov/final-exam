@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 @AllArgsConstructor
 public class MainController {
-
     @GetMapping("/")
     public String getMainPage(Model model){
         return "main_page";
