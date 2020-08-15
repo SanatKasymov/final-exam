@@ -2,6 +2,7 @@ package kg.attractor.fexam.controller;
 
 import kg.attractor.fexam.DTO.CommentDTO;
 import kg.attractor.fexam.model.PageableExample;
+import kg.attractor.fexam.model.PlacePhoto;
 import kg.attractor.fexam.repository.PlaceRepository;
 import kg.attractor.fexam.repository.UserRepository;
 import kg.attractor.fexam.service.CommentService;
@@ -56,6 +57,10 @@ public class MainController {
     public String placePage(@PathVariable int id, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = auth.getName();
+        List<PlacePhoto> placePhotos = placeService.getThisPlaceImages(id);
+        if(placePhotos!=null){
+            model.addAttribute("placePhotos", placePhotos);
+        }
         List<CommentDTO> commentDTOS = commentService.getThisPlaceComments(id);
         model.addAttribute("place", placeRepository.findById(id).get());
         if(commentDTOS!=null){
@@ -98,5 +103,12 @@ public class MainController {
         model.addAttribute("places",places);
         model.addAttribute("user", userRepository.findByEmail(principal.getName()));
         return "search_result";
+    }
+
+    @PostMapping("/add_new_image")
+    public String addNewPlace(@RequestParam("place_id") Integer placeId,
+            @RequestParam("place_image") MultipartFile image) throws IOException {
+        int id = placeService.addNewImage(image, placeId);
+        return "redirect:/places/"+id;
     }
 }

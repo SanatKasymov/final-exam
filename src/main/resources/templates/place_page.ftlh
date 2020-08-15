@@ -7,6 +7,19 @@
                 <p>${place.description}</p>
             </div>
         <p>Рейтинг: ${place.rating}</p>
+
+        <#if placePhotos??>
+            <div class="wrapper">
+                <#list placePhotos as place>
+                    <div class="place-card">
+                            <div class="flex-column box-400">
+                                <img class="place-image" src="${place.image}" alt="image.jpg">
+                            </div>
+                        </a>
+                    </div>
+                </#list>
+            </div>
+        </#if>
         <div class="modal-dialog" id="modal_window" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -36,6 +49,26 @@
         <#else>
             <p>Чтобы оставить отзыв Вам нужно авторизоваться</p>
         </#if>
+        <form id="form" name="form" enctype="multipart/form-data" action="/add_new_image" method="post">
+            <#if _csrf??>
+                <input type="hidden" name="${(_csrf.parameterName)!'csrf'}" value="${(_csrf.token)!'--no-token--'}"/>
+            </#if>
+            <input type="number" name="place_id" id="place_id" value="${place.id}">
+            <div class = "add-post-image">
+                <input type="file" name="place_image" id="image">
+            </div>
+            <div>
+                <button type="submit">Добавить изображение!</button>
+            </div>
+            <div>
+                <#if errors?? >
+                    <p>Errors in data!</p>
+                    <#list errors as fieldError>
+                        <p>${fieldError.field} - ${fieldError.defaultMessage!'-- no message --'}</p>
+                    </#list>
+                </#if>
+            </div>
+        </form>
         <#if comments??>
         <table class="table">
 

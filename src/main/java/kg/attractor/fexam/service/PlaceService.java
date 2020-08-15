@@ -2,6 +2,8 @@ package kg.attractor.fexam.service;
 
 import kg.attractor.fexam.DTO.PlaceDTO;
 import kg.attractor.fexam.model.Place;
+import kg.attractor.fexam.model.PlacePhoto;
+import kg.attractor.fexam.repository.PlacePhotoRepository;
 import kg.attractor.fexam.repository.PlaceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class PlaceService {
     PlaceRepository placeRepository;
+    PlacePhotoRepository placePhotoRepository;
 
     public List<PlaceDTO> findAllPLaces() {
         return placeRepository.findAll().stream()
@@ -43,6 +46,23 @@ public class PlaceService {
         return place.getId();
     }
 
+    public Integer addNewImage(MultipartFile p_image, Integer placeId) throws IOException{
+        String path ="./src/main/resources/static/images";
+        File imageFile = new File(path + "/" + p_image.getOriginalFilename());
+        FileOutputStream os = new FileOutputStream(imageFile);
+        os.write(p_image.getBytes());
+        os.close();
+
+        PlacePhoto placePhoto = PlacePhoto.builder()
+                .image("/images/"+p_image.getOriginalFilename())
+                .placeId(placeId)
+                .build();
+
+        placePhotoRepository.save(placePhoto);
+
+        return placeId;
+    }
+
     public List<Place> searchPlaces(String text, Pageable pageable){
 
          List<Place> places = placeRepository.findAll();
@@ -55,5 +75,9 @@ public class PlaceService {
              }
          }
          return thisPlaces;
+    }
+
+    public List<PlacePhoto> getThisPlaceImages(Integer placeId){
+        return placePhotoRepository.findAllByPlaceId(placeId);
     }
 }
