@@ -1,27 +1,12 @@
 <#import 'partials/main.ftlh' as main>
 <@main.renderWith scripts=["/js/script.js"]>
-    <h3>${place.name}</h3>
+    <h3 class="font-weight-bold place-header">${place.name}</h3>
     <div class="place-body" id="place-body">
         <img class="place-image" src="${place.image}" alt="${place.name}">
-        <p>${place.description}</p>
-        <p>${place.rating}</p>
-        <#if authorized??>
-            <button type="button" onclick = "showModalWin()" class="add-post-button ml-auto text-uppercase" data-toggle="modal" data-target="#modal_window">Оставить отзыв</button>
-        <#else>
-            <p>Чтобы оставить отзыв Вам нужно авторизоваться</p>
-        </#if>
-        <#if comments??>
-            <#list comments as comment>
-                <div class="flex-dir">
-                    <p>${comment.login}</p>
-                    <p>${comment.content}</p>
-                    <p>${comment.date}</p>
-                    <p>${comment.time}</p>
-                </div>
-            </#list>
-        <#else>
-            <h4>There is no messages yet</h4>
-        </#if>
+            <div>
+                <p>${place.description}</p>
+            </div>
+        <p>Рейтинг: ${place.rating}</p>
         <div class="modal-dialog" id="modal_window" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -33,7 +18,12 @@
                             <input type="hidden" name="${(_csrf.parameterName)!'csrf'}" value="${(_csrf.token)!'--no-token--'}"/>
                         </#if>
                         <input type="hidden" name="place_id" value="${place.id}"/>
-                        <textarea type="text"  name="message_content" placeholder="Что вы думаете об этом заведении?" name="text" id="text"></textarea>
+                        <textarea class="message-content" type="text"  name="message_content" placeholder="Что вы думаете об этом заведении?" name="text" id="text"></textarea>
+                        <select type="hidden" class="form-control mb-2" name="ratingValue" >
+                            <#list ratingValue as r>
+                                <option value="${r}">${r}</option>
+                            </#list>
+                        </select>
                         <div class = "add-message">
                             <button type="button" id="add-message">Отправить</button>
                         </div>
@@ -41,6 +31,40 @@
                 </div>
             </div>
         </div>
+        <#if authorized??>
+            <button type="button" onclick = "showModalWin()" class="add-post-button btn btn-outline-primary" data-toggle="modal" data-target="#modal_window">Оставить отзыв</button>
+        <#else>
+            <p>Чтобы оставить отзыв Вам нужно авторизоваться</p>
+        </#if>
+        <#if comments??>
+        <table class="table">
+
+            <tbody>
+            <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Логин</th>
+                <th>Комментарий</th>
+                <th>Дата</th>
+                <th>Время</th>
+            </tr>
+            </thead>
+            <#list comments as comment>
+            <thead class="thead-light">
+                <tr>
+                    <td>${comment_index+1}</td>
+                    <td>${comment.login}</td>
+                    <td>${comment.content}</td>
+                    <td>${comment.date}</td>
+                    <td>${comment.time}</td>
+                </tr>
+            </thead>
+            </#list>
+        <#else>
+            <h4>There is no messages yet</h4>
+        </#if>
+                </tbody>
+        </table>
 
     </div>
 </@main.renderWith>

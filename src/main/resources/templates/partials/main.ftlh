@@ -1,4 +1,4 @@
-<#macro renderWith title="Rating" scripts=[] styles=[]>
+<#macro renderWith title="Rating" scripts=["/js/script.js"] styles=["/css/main.css"]>
     <!doctype html>
     <html lang=en>
     <head>

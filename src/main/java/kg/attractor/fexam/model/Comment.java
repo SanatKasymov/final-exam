@@ -25,6 +25,9 @@ public class Comment {
     private Integer userId;
 
     @Column(length = 128)
+    private Integer ratingValue;
+
+    @Column(length = 128)
     private String content;
 
     @Column

@@ -48,3 +48,14 @@ body{
 .add-message{
     margin-top: 20px;
 }
+
+.place-header{
+    margin-top: 20px;
+}
+
+.add-post-button{
+    margin-bottom: 10px;
+}
+.message-content{
+    width: 400px;
+}

@@ -28,3 +28,13 @@ saveButton.addEventListener("click", function() {
         body: data
     }).then(r => r.json()).then(data => {window.location.href = "/places/"+place_id});
 });
+
+function search() {
+    let value = document.getElementById("search-input").value;
+    if(value.length === 0){
+        return;
+    }else{
+        window.location.href = '/search/'+value;
+    }
+
+};

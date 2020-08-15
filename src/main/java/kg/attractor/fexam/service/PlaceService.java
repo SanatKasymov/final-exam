@@ -4,12 +4,15 @@ import kg.attractor.fexam.DTO.PlaceDTO;
 import kg.attractor.fexam.model.Place;
 import kg.attractor.fexam.repository.PlaceRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,5 +41,19 @@ public class PlaceService {
         placeRepository.save(place);
 
         return place.getId();
+    }
+
+    public List<Place> searchPlaces(String text, Pageable pageable){
+
+         List<Place> places = placeRepository.findAll();
+         List<Place> thisPlaces = new ArrayList<>();
+         for(Place place: places){
+             if(place.getName().contains(text)){
+                 thisPlaces.add(place);
+             }else if(place.getDescription().contains(text)){
+                 thisPlaces.add(place);
+             }
+         }
+         return thisPlaces;
     }
 }

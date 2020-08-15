@@ -3,6 +3,7 @@ package kg.attractor.fexam.controller;
 import kg.attractor.fexam.DTO.CommentDTO;
 import kg.attractor.fexam.model.PageableExample;
 import kg.attractor.fexam.repository.PlaceRepository;
+import kg.attractor.fexam.repository.UserRepository;
 import kg.attractor.fexam.service.CommentService;
 import kg.attractor.fexam.service.PlaceService;
 import kg.attractor.fexam.service.PropertiesService;
@@ -23,6 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -33,6 +35,8 @@ public class MainController {
     private final PropertiesService propertiesService;
     private final PlaceService placeService;
     private final CommentService commentService;
+    private final UserRepository userRepository;
+
 
     @GetMapping("/")
     public String getMainPage(Model model, Pageable pageable, HttpServletRequest uriBuilder){
@@ -62,6 +66,8 @@ public class MainController {
         if(!userEmail.equals("anonymousUser")){
             model.addAttribute("authorized", true);
         }
+        List<Integer> ratingValue = commentService.getValue();
+        model.addAttribute("ratingValue", ratingValue);
         return "place_page";
     }
 
@@ -79,9 +85,18 @@ public class MainController {
 
     @PostMapping("/createMessage")
     public String addNewReview(@RequestParam("place_id") Integer placeId,
+                               @RequestParam("ratingValue") Integer ratingValue,
                                @RequestParam("message_content") String content){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = auth.getName();
-        return commentService.createNewMessage(placeId, content, userEmail);
+        return commentService.createNewMessage(placeId, content, userEmail, ratingValue);
+    }
+
+    @GetMapping("/search/{search}")
+    public String search(@PathVariable("search") String search, Principal principal, Model model, Pageable pageable){
+        var places = placeService.searchPlaces(search, pageable);
+        model.addAttribute("places",places);
+        model.addAttribute("user", userRepository.findByEmail(principal.getName()));
+        return "search_result";
     }
 }
