@@ -12,10 +12,10 @@
         <#list styles as styleSource>
             <link rel="stylesheet" href="${styleSource}">
         </#list>
-        <h1>Welcome to the forum!</h1>
+        <h1>Welcome to the Cafe Critic!</h1>
     </head>
     <header>
-        
+
     </header>
     <body>
     <div class="container">

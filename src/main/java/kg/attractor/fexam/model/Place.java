@@ -9,7 +9,7 @@ import javax.persistence.*;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
 @Entity
-@Table(name = "place")
+@Table(name = "places")
 public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Place {
     private String name;
 
     @Column
-    private double description;
+    private String description;
 
     @Column
     private double rating;
