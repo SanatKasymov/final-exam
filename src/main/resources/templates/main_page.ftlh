@@ -7,14 +7,14 @@
             <#if places??>
                 <div class="wrapper">
                   <#list places as place>
-                          <div>
+                          <div class="place-card">
                               <a href="/places/${place.id}">
                                   <div class="flex-column box-400">
                                       <img class="place-image" src="${place.image}" alt="${place.name}">
                                       <p>${place.name}</p>
                                   </div>
                               </a>
-                      </div>
+                        </div>
                   </#list>
                 </div>
             <#else>
