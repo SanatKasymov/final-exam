@@ -7,15 +7,20 @@ import kg.attractor.fexam.service.PropertiesService;
 import lombok.AllArgsConstructor;
 import org.dom4j.rule.Mode;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Controller
 @RequestMapping
@@ -53,7 +58,27 @@ public class MainController {
     @PostMapping("/create_new_place")
     public String rootSave(@RequestParam("place_name") String name, @RequestParam("place_description") String description,
                            @RequestParam("place_image") MultipartFile image) throws IOException {
-        placeService.addNewPlace(name, description, image);
+        return placeService.addNewPlace(name, description, image);
+    }
+
+    @GetMapping(value = "/images/{name}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @ResponseBody
+    public byte[] getImage(@PathVariable("name") String name) {
+        String path = "/images";
+        try {
+            InputStream is = new FileInputStream(new File(path)+"/"+name);
+            return StreamUtils.copyToByteArray(is);
+        } catch (Exception e) {
+            InputStream is = null;
+            try {
+                is = new FileInputStream(new File(path) + "/" +name);
+                return StreamUtils.copyToByteArray(is);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
