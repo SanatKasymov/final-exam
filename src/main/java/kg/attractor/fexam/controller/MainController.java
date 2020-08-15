@@ -101,7 +101,6 @@ public class MainController {
     public String search(@PathVariable("search") String search, Principal principal, Model model, Pageable pageable){
         var places = placeService.searchPlaces(search, pageable);
         model.addAttribute("places",places);
-        model.addAttribute("user", userRepository.findByEmail(principal.getName()));
         return "search_result";
     }
 

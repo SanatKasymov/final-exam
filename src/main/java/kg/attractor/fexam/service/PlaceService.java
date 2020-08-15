@@ -68,9 +68,9 @@ public class PlaceService {
          List<Place> places = placeRepository.findAll();
          List<Place> thisPlaces = new ArrayList<>();
          for(Place place: places){
-             if(place.getName().contains(text)){
+             if(place.getName().toLowerCase().contains(text.toLowerCase())){
                  thisPlaces.add(place);
-             }else if(place.getDescription().contains(text)){
+             }else if(place.getDescription().toLowerCase().contains(text.toLowerCase())){
                  thisPlaces.add(place);
              }
          }

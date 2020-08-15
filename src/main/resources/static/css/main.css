@@ -32,7 +32,7 @@ body{
     display: none;
     position: fixed;
     height: 200px;
-    width: 300px;
+    width: 500px;
 }
 
 #shadow {
@@ -58,4 +58,21 @@ body{
 }
 .message-content{
     width: 400px;
+}
+
+.wrapper-photo{
+    display: grid;
+    grid-template-columns: 180px 180px 180px 180px 180px 180px;
+}
+.place-image-photo{
+    width: 160px;
+    height: auto;
+}
+.place-card-photo{
+    width: 170px;
+    height: 130px;
+}
+.add-place-image{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

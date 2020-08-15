@@ -10,17 +10,17 @@
             <div>
                 <label class="flex flex-v-center">
                     <p class="label-input-text">Название заведения:</p>
-                    <input type="text" name="place_name" placeholder="Название">
+                    <input type="text" name="place_name" placeholder="Название" required>
                 </label>
             </div>
             <div>
                 <label class="flex flex-v-center">
                     <p class="label-input-text">Описание:</p>
-                    <input type="text" name="place_description" placeholder="Описание">
+                    <input type="text" name="place_description" placeholder="Описание" required>
                 </label>
             </div>
             <div class = "add-post-image">
-                <input type="file" name="place_image" id="image">
+                <input type="file" name="place_image" id="image" required>
             </div>
             <div>
                 <button type="submit">Добавить заведение!</button>

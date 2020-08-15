@@ -9,11 +9,11 @@
         <p>Рейтинг: ${place.rating}</p>
 
         <#if placePhotos??>
-            <div class="wrapper">
+            <div class="wrapper-photo">
                 <#list placePhotos as place>
-                    <div class="place-card">
+                    <div class="place-card-photo">
                             <div class="flex-column box-400">
-                                <img class="place-image" src="${place.image}" alt="image.jpg">
+                                <img class="place-image-photo" src="${place.image}" alt="image.jpg">
                             </div>
                         </a>
                     </div>
@@ -46,29 +46,31 @@
         </div>
         <#if authorized??>
             <button type="button" onclick = "showModalWin()" class="add-post-button btn btn-outline-primary" data-toggle="modal" data-target="#modal_window">Оставить отзыв</button>
+
+            <form id="form" name="form" enctype="multipart/form-data" action="/add_new_image" method="post">
+                <#if _csrf??>
+                    <input type="hidden" name="${(_csrf.parameterName)!'csrf'}" value="${(_csrf.token)!'--no-token--'}"/>
+                </#if>
+                <input type="hidden" name="place_id" id="place_id" value="${place.id}">
+                <div class = "add-place-image">
+                    <input type="file" name="place_image" id="image">
+                </div>
+                <div class = "add-place-image">
+                    <button class="btn btn-outline-primary" type="submit">Добавить изображение!</button>
+                </div>
+                <div>
+                    <#if errors?? >
+                        <p>Errors in data!</p>
+                        <#list errors as fieldError>
+                            <p>${fieldError.field} - ${fieldError.defaultMessage!'-- no message --'}</p>
+                        </#list>
+                    </#if>
+                </div>
+            </form>
         <#else>
             <p>Чтобы оставить отзыв Вам нужно авторизоваться</p>
         </#if>
-        <form id="form" name="form" enctype="multipart/form-data" action="/add_new_image" method="post">
-            <#if _csrf??>
-                <input type="hidden" name="${(_csrf.parameterName)!'csrf'}" value="${(_csrf.token)!'--no-token--'}"/>
-            </#if>
-            <input type="number" name="place_id" id="place_id" value="${place.id}">
-            <div class = "add-post-image">
-                <input type="file" name="place_image" id="image">
-            </div>
-            <div>
-                <button type="submit">Добавить изображение!</button>
-            </div>
-            <div>
-                <#if errors?? >
-                    <p>Errors in data!</p>
-                    <#list errors as fieldError>
-                        <p>${fieldError.field} - ${fieldError.defaultMessage!'-- no message --'}</p>
-                    </#list>
-                </#if>
-            </div>
-        </form>
+
         <#if comments??>
         <table class="table">
 
