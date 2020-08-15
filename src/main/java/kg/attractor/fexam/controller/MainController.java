@@ -60,25 +60,4 @@ public class MainController {
                            @RequestParam("place_image") MultipartFile image) throws IOException {
         return placeService.addNewPlace(name, description, image);
     }
-
-    @GetMapping(value = "/images/{name}", produces = MediaType.IMAGE_JPEG_VALUE)
-    @ResponseBody
-    public byte[] getImage(@PathVariable("name") String name) {
-        String path = "/images";
-        try {
-            InputStream is = new FileInputStream(new File(path)+"/"+name);
-            return StreamUtils.copyToByteArray(is);
-        } catch (Exception e) {
-            InputStream is = null;
-            try {
-                is = new FileInputStream(new File(path) + "/" +name);
-                return StreamUtils.copyToByteArray(is);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 }

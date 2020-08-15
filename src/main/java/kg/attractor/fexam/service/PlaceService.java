@@ -24,7 +24,7 @@ public class PlaceService {
     }
 
     public String addNewPlace(String p_name, String p_description, MultipartFile p_image) throws IOException {
-        String path ="../images";
+        String path ="./src/main/resources/static/images";
         File imageFile = new File(path + "/" + p_image.getOriginalFilename());
         FileOutputStream os = new FileOutputStream(imageFile);
         os.write(p_image.getBytes());
