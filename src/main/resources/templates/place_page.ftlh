@@ -25,7 +25,7 @@
         <div class="modal-dialog" id="modal_window" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Reply</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ваш Отзыв</h5>
                 </div>
                 <div class="modal-body">
                     <form id="comment-form" class="commentForm" name="comment-form" enctype="form-data" action="/createComment" method="post">

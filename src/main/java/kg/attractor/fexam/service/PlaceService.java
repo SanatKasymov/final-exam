@@ -23,7 +23,7 @@ public class PlaceService {
                 .map(PlaceDTO::from).collect(Collectors.toList());
     }
 
-    public String addNewPlace(String p_name, String p_description, MultipartFile p_image) throws IOException {
+    public Integer addNewPlace(String p_name, String p_description, MultipartFile p_image) throws IOException {
         String path ="./src/main/resources/static/images";
         File imageFile = new File(path + "/" + p_image.getOriginalFilename());
         FileOutputStream os = new FileOutputStream(imageFile);
@@ -36,6 +36,7 @@ public class PlaceService {
                 .image("/images/"+p_image.getOriginalFilename())
                 .build();
         placeRepository.save(place);
-        return "success";
+
+        return place.getId();
     }
 }

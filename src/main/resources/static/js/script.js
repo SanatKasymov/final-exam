@@ -23,8 +23,8 @@ saveButton.addEventListener("click", function() {
     let data = new FormData(messageForm);
     let place_id = data.get("place_id");
 
-    fetch("http://localhost:8080/createMessage", {
+    fetch("/createMessage", {
         method: 'POST',
         body: data
-    }).then(r => r.json()).then(data => {window.location.href = "http://localhost:8080/place/"+place_id});
+    }).then(r => r.json()).then(data => {window.location.href = "/places/"+place_id});
 });

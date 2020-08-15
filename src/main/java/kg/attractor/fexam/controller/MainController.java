@@ -50,12 +50,17 @@ public class MainController {
 
     @GetMapping("/places/{id:\\d+?}")
     public String placePage(@PathVariable int id, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = auth.getName();
         List<CommentDTO> commentDTOS = commentService.getThisPlaceComments(id);
         model.addAttribute("place", placeRepository.findById(id).get());
         if(commentDTOS!=null){
             model.addAttribute("comments", commentDTOS);
         }else{
             model.addAttribute("comments", false);
+        }
+        if(!userEmail.equals("anonymousUser")){
+            model.addAttribute("authorized", true);
         }
         return "place_page";
     }
@@ -66,8 +71,17 @@ public class MainController {
     }
 
     @PostMapping("/create_new_place")
-    public String rootSave(@RequestParam("place_name") String name, @RequestParam("place_description") String description,
+    public String addNewPlace(@RequestParam("place_name") String name, @RequestParam("place_description") String description,
                            @RequestParam("place_image") MultipartFile image) throws IOException {
-        return placeService.addNewPlace(name, description, image);
+        int id = placeService.addNewPlace(name, description, image);
+        return "redirect:/places/"+id;
+    }
+
+    @PostMapping("/createMessage")
+    public String addNewReview(@RequestParam("place_id") Integer placeId,
+                               @RequestParam("message_content") String content){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = auth.getName();
+        return commentService.createNewMessage(placeId, content, userEmail);
     }
 }

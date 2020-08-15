@@ -7,6 +7,8 @@ import kg.attractor.fexam.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,5 +35,17 @@ public class CommentService {
             return messageDTOList;
         }
         return null;
+    }
+
+    public String createNewMessage(Integer placeId, String content, String userEmail){
+        Integer id = userRepository.findUserByEmail(userEmail).getId();
+        commentRepository.save(Comment.builder()
+                .placeId(placeId)
+                .content(content)
+                .userId(id)
+                .messageDate(LocalDate.now())
+                .messageTime(LocalTime.now())
+                .build());
+        return "success";
     }
 }

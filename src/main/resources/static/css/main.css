@@ -23,3 +23,28 @@ body{
     display: flex;
     justify-content: space-between;
 }
+.modal-dialog {
+    position: absolute;
+    background: #ccc;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    display: none;
+    position: fixed;
+    height: 200px;
+    width: 300px;
+}
+
+#shadow {
+    position: fixed;
+    width:100%;
+    height:100%;
+    z-index:1;
+    background:#000;
+    opacity: 0.5;
+    left:0;
+    top:0;
+}
+.add-message{
+    margin-top: 20px;
+}
