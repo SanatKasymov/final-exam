@@ -33,7 +33,7 @@ public class PlaceService {
         Place place = Place.builder()
                 .name(p_name)
                 .description(p_description)
-                .image(p_image.getOriginalFilename())
+                .image("/images/"+p_image.getOriginalFilename())
                 .build();
         placeRepository.save(place);
         return "success";
