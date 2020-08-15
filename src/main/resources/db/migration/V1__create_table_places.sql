@@ -43,6 +43,42 @@ insert into places(name, description, image, rating) VALUES
 ('Impresso Espresso', 'Perfect place with great Interior', '/images/cafe.jpg', 4.5);
 insert into places(name, description, image, rating) VALUES
 ('Cup o Joe', 'Perfect place with great Interior', '/images/cafe.jpg', 5.9);
+insert into places(name, description, image, rating) VALUES
+('Aroma Mocha', 'Perfect place with great Interior', '/images/cafe.jpg', 5.5);
+insert into places(name, description, image, rating) VALUES
+('Baristas', 'Perfect place great Interior', '/images/cafe.jpg', 4.5);
+insert into places(name, description, image, rating) VALUES
+('Beany Business', 'Perfect place with great Interior', '/images/cafe.jpg', 6.5);
+insert into places(name, description, image, rating) VALUES
+('Coffee Club ', 'Perfect place with great Interior', '/images/cafe.jpg', 5.8);
+insert into places(name, description, image, rating) VALUES
+('The Roasted Bean', 'Perfect place with great Interior', '/images/cafe.jpg', 4.5);
+insert into places(name, description, image, rating) VALUES
+('Topped Off', 'Perfect place with great Interior', '/images/cafe.jpg', 7);
+insert into places(name, description, image, rating) VALUES
+('Mugs Coffee', 'Perfect place with great Interior', '/images/cafe.jpg', 5.3);
+insert into places(name, description, image, rating) VALUES
+('Impresso Espresso', 'Perfect place with great Interior', '/images/cafe.jpg', 4.5);
+insert into places(name, description, image, rating) VALUES
+('Cup o Joe', 'Perfect place with great Interior', '/images/cafe.jpg', 5.9);
+insert into places(name, description, image, rating) VALUES
+('Aroma Mocha', 'Perfect place with great Interior', '/images/cafe.jpg', 5.5);
+insert into places(name, description, image, rating) VALUES
+('Baristas', 'Perfect place great Interior', '/images/cafe.jpg', 4.5);
+insert into places(name, description, image, rating) VALUES
+('Beany Business', 'Perfect place with great Interior', '/images/cafe.jpg', 6.5);
+insert into places(name, description, image, rating) VALUES
+('Coffee Club ', 'Perfect place with great Interior', '/images/cafe.jpg', 5.8);
+insert into places(name, description, image, rating) VALUES
+('The Roasted Bean', 'Perfect place with great Interior', '/images/cafe.jpg', 4.5);
+insert into places(name, description, image, rating) VALUES
+('Topped Off', 'Perfect place with great Interior', '/images/cafe.jpg', 7);
+insert into places(name, description, image, rating) VALUES
+('Mugs Coffee', 'Perfect place with great Interior', '/images/cafe.jpg', 5.3);
+insert into places(name, description, image, rating) VALUES
+('Impresso Espresso', 'Perfect place with great Interior', '/images/cafe.jpg', 4.5);
+insert into places(name, description, image, rating) VALUES
+('Cup o Joe', 'Perfect place with great Interior', '/images/cafe.jpg', 5.9);
 
 
 

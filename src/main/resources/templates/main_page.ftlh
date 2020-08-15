@@ -3,22 +3,23 @@
   <div>
       <div>
           <h4>Places</h4>
-          <div class="card-deck">
+          <div class = "place-cards">
             <#if places??>
-              <#list places as place>
-              <div class="card">
-                  <img class="card-img-top" src="${place.image}" alt="${place.name}">
-                  <div class="card-body">
-                      <h5 class="card-title">${place.name}</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                  </div>
-              </div>
-              </#list>
+                  <#list places as place>
+                      <div class="flex flex-column box flex-v-center">
+                          <a href="/places/${place.id}">
+                              <div class="flex-column box-400">
+                                  <img class="artwork-image" src="${place.image}" alt="${place.name}">
+                                  <p>${place.name}</p>
+                              </div>
+                          </a>
+                      </div>
+                  </#list>
             <#else>
                 <h4>There is no places</h4>
             </#if>
           </div>
+          <#include "partials/pagination.ftlh">
       </div>
   </div>
 

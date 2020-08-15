@@ -7,6 +7,10 @@ body{
     width: 1280px;
     margin: 0 auto;
 }
-.image-card {
-    min-width: 300px;
+.place-cards {
+    max-width: 300px;
+    display:inline-block;
+}
+.card-img-top {
+    width: 300px;
 }
